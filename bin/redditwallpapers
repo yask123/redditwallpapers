@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import argparse
 import ctypes
 import os
@@ -94,24 +94,14 @@ def main():
     wcounts = len(wlinks)
 
     while True:
-<<<<<<< HEAD
-        print i
-=======
-        fail = False
         print(i)
->>>>>>> Convert print commands to python 3 format
         each = wlinks[i]
         try:
             url = sanitize(each.url)
             imgext = url.split('.')[-1]
         except ValueError as e:
-<<<<<<< HEAD
-            print e
-            i += 1
-=======
             print(e)
-            i+=1
->>>>>>> Convert print commands to python 3 format
+            i += 1
             continue
 
         response = requests.get(url, stream=True)
@@ -122,24 +112,12 @@ def main():
 
         imagePath = my_dir + '/' + str(i) + '.' + imgext
 
-<<<<<<< HEAD
         im = Image.open(imagePath)
         width, height = im.size
         # We only want high resolution images
         if int(width) < 2000 or int(height) < 1300:
             i+=1
-            print 'poor pic, failed'
-=======
-        with Image.open(imagePath) as im:
-            width, height = im.size
-            # We only want high resolution images
-            if int(width) < 2000 or int(height) < 1300:
-                i+=1
-                print('poor pic, failed')
-                fail = True
-
-        if fail:
->>>>>>> Convert print commands to python 3 format
+            print('poor pic, failed')
             continue
 
         if platform.system() == 'Darwin':
@@ -153,13 +131,9 @@ def main():
         else:
             print('Platform not recognized')
             sys.exit()
-<<<<<<< HEAD
 
-        print 'Setting ' + url + ' as wallpaper'
-        print 'Done'
-=======
+        print('Setting ' + url + ' as wallpaper')
         print('Done')
->>>>>>> Convert print commands to python 3 format
 
         i += 1
         if i == wcounts - 1:
