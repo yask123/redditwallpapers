@@ -78,7 +78,7 @@ def main():
     wall_duration = clean_input(args.time)
     count = clean_input(args.count)
 
-    print sub_reddit, sort_method, wall_duration, count
+    print(sub_reddit, sort_method, wall_duration, count)
     submissions = getattr(r.get_subreddit(str(sub_reddit)), str(sort_method))(limit=count)
 
     my_dir = os.path.expanduser('~/.epwallpapers')
@@ -94,14 +94,24 @@ def main():
     wcounts = len(wlinks)
 
     while True:
+<<<<<<< HEAD
         print i
+=======
+        fail = False
+        print(i)
+>>>>>>> Convert print commands to python 3 format
         each = wlinks[i]
         try:
             url = sanitize(each.url)
             imgext = url.split('.')[-1]
         except ValueError as e:
+<<<<<<< HEAD
             print e
             i += 1
+=======
+            print(e)
+            i+=1
+>>>>>>> Convert print commands to python 3 format
             continue
 
         response = requests.get(url, stream=True)
@@ -112,12 +122,24 @@ def main():
 
         imagePath = my_dir + '/' + str(i) + '.' + imgext
 
+<<<<<<< HEAD
         im = Image.open(imagePath)
         width, height = im.size
         # We only want high resolution images
         if int(width) < 2000 or int(height) < 1300:
             i+=1
             print 'poor pic, failed'
+=======
+        with Image.open(imagePath) as im:
+            width, height = im.size
+            # We only want high resolution images
+            if int(width) < 2000 or int(height) < 1300:
+                i+=1
+                print('poor pic, failed')
+                fail = True
+
+        if fail:
+>>>>>>> Convert print commands to python 3 format
             continue
 
         if platform.system() == 'Darwin':
@@ -129,11 +151,15 @@ def main():
         elif platform.system() == 'Linux':
             linux_wallpaper(imagePath)
         else:
-            print 'Platform not recognized'
+            print('Platform not recognized')
             sys.exit()
+<<<<<<< HEAD
 
         print 'Setting ' + url + ' as wallpaper'
         print 'Done'
+=======
+        print('Done')
+>>>>>>> Convert print commands to python 3 format
 
         i += 1
         if i == wcounts - 1:
