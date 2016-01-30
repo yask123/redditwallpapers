@@ -91,13 +91,13 @@ def main():
 
     while True:
         fail = False
-        print i
+        print (i)
         each = wlinks[i]
         try:
             url = sanitize(each.url)
             imgext = url.split('.')[-1]
         except ValueError as e:
-            print e
+            print (e)
             i+=1
             continue
 
@@ -114,7 +114,7 @@ def main():
             # We only want high resolution images
             if int(width) < 2000 or int(height) < 1300:
                 i+=1
-                print 'poor pic, failed'
+                print ('poor pic, failed')
                 fail = True
 
         if fail:
@@ -132,7 +132,7 @@ def main():
         else:
             print ('Platform not recognized')
             sys.exit()
-        print 'Done'
+        print ('Done')
 
         i += 1
         if i == wcounts -1:
