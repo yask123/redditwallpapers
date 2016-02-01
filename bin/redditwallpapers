@@ -52,6 +52,19 @@ def clean_input(inp):
     else:
         return inp
 
+def clean_input_res(inp):
+    try:
+        res = map(int, inp[0].lower().split("x"))
+    except ValueError:
+        print "INVALID RESOLUTION: Set to 2000x1300"
+        return [2000, 1300]
+
+    if len(res) >= 2:
+        return [res[0], res[1]]
+    else:
+        print "INVALID RESOLUTION: Set to 2000x1300"
+        return [2000, 1300]
+
 
 def main():
     description = "Set trending reddit images as wallpapers"
@@ -65,6 +78,8 @@ def main():
                         help="Time (in seconds) duration for each wallpaper")
     parser.add_argument("-count", "--count", type=int, default=20, nargs='+',
                         help="Count of total number of wallpapers to select")
+    parser.add_argument("-res", "--resolution", type=str, default="2000x1300", nargs='+',
+                        help="Minimum resolution for the wallpapers, eg: 2000x1300")
     args = parser.parse_args()
 
     if platform.system() == 'Darwin' or platform.system() == 'Linux':
@@ -76,8 +91,9 @@ def main():
     sort_method = clean_input(args.sort_method)
     wall_duration = clean_input(args.time)
     count = clean_input(args.count)
+    resolution = clean_input_res(args.resolution)
 
-    print sub_reddit, sort_method, wall_duration, count
+    print sub_reddit, sort_method, wall_duration, count, resolution
     submissions = getattr(r.get_subreddit(str(sub_reddit)), str(sort_method))(limit=count)
 
     my_dir = os.path.expanduser('~/.epwallpapers')
@@ -114,7 +130,7 @@ def main():
         im = Image.open(imagePath)
         width, height = im.size
         # We only want high resolution images
-        if int(width) < 2000 or int(height) < 1300:
+        if int(width) < resolution[0] or int(height) < resolution[1]:
             i+=1
             print 'poor pic, failed'
             continue
