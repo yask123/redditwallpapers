@@ -63,7 +63,7 @@ def clean_input_res(inp):
         return [res[0], res[1]]
     else:
         print "INVALID RESOLUTION: Set to 2000x1300"
-        return [2000, 1300]
+    return [2000, 1300]
 
 
 def main():
@@ -78,7 +78,7 @@ def main():
                         help="Time (in seconds) duration for each wallpaper")
     parser.add_argument("-count", "--count", type=int, default=20, nargs='+',
                         help="Count of total number of wallpapers to select")
-    parser.add_argument("-res", "--resolution", type=str, default="2000x1300", nargs='+',
+    parser.add_argument("-res", "--resolution", type=str, default=["2000x1300"], nargs='+',
                         help="Minimum resolution for the wallpapers, eg: 2000x1300")
     args = parser.parse_args()
 
