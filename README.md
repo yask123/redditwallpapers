@@ -25,7 +25,7 @@ $ redditwallpapers
 #### What it does?
 ##### Default Behavior
 
-* It would collect the top 20 rated wallpapers from `/r/EarthPorn` 
+* It would collect the top 20 rated wallpapers from `/r/EarthPorn`
 * Select only the high resolutions images one by one and sets them as desktop wallpaper (For a duration of 1 min)
 * Keep looping untill you kill the script
 
@@ -33,10 +33,10 @@ $ redditwallpapers
 
 #### Customizations:
 
-To select `top hot` `40` wallpapers from `r/EarthPorn` subreddit, and set duration for `10` mins
+To select `top hot` `40` wallpapers with minimum resolution `2000x1300` from `r/EarthPorn` subreddit, and set duration for `10` mins
 
 ```bash
-$ redditwallpapers -sr EarthPorn -sort get_top_from_all  -count 40 -t 10
+$ redditwallpapers -res 2000x1300 -sr EarthPorn -sort get_top_from_all -count 40 -t 10
 ```
 
 ##### Sort methods:
@@ -68,13 +68,13 @@ $ @reboot redditwallpapers
 ```
 
 #### Stop the script
-Get the `PID_NO` by running: 
+Get the `PID_NO` by running:
 
 ```bash
 $ ps aux | grep redditwallpapers
 ```
 
-then run: 
+then run:
 `bash
 $ kill PID_NO
 `
