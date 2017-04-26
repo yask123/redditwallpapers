@@ -81,8 +81,11 @@ def main():
     print sub_reddit, sort_method, wall_duration, count
     submissions = getattr(r.get_subreddit(str(sub_reddit)), str(sort_method))(limit=count)
 
-    my_dir = os.path.expanduser('~/.epwallpapers')
-
+    if platform.system() == 'Windows':
+        #The escape sequence causes the wallpaper not to change
+        my_dir = os.path.expanduser('~\\.epwallpapers')
+    else:
+        my_dir = os.path.expanduser('~/.epwallpapers')
     # Create .epwallpapers directory to store all images
     if not os.path.exists(my_dir):
         os.makedirs(my_dir)
@@ -125,7 +128,14 @@ def main():
             osxcmd = 'osascript -e \'tell application "System Events" to set picture of every desktop to "' + imagePath + '" \''
             os.system(osxcmd)
         elif platform.system() == 'Windows':
+            #converting the image
+            if imgext == 'png':
+                im = Image.open(imagePath)
+                im.save(my_dir + '\\' + str(i) + '.jpg')
+                os.remove(imagePath)
+            imagePath = os.path.join(os.path.expanduser('~\\epwallpapers'), str(i) + '.jpg')
             SPI_SETDESKWALLPAPER = 20
+            print imagePath
             ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, imagePath, 3)
         elif platform.system() == 'Linux':
             linux_wallpaper(imagePath)
