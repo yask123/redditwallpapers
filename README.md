@@ -59,7 +59,7 @@ $ redditwallpapers -sr EarthPorn -sort get_top_from_all  -count 40 -t 10
  * 'get_top_from_week'
  * 'get_top_from_year'
 
-#### Run it on startup
+#### Run it on startup:
 
 Type following command on terminal
 
